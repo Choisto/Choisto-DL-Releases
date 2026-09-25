@@ -1,52 +1,52 @@
 # Choisto DL
 
-Plugin Jellyfin de téléchargement : liens directs, 1fichier, Torbox, magnets et .torrent, importés directement dans vos bibliothèques.
+A Jellyfin plugin that downloads direct links, 1fichier, Torbox, magnets and .torrent files straight into your libraries.
 
-**[Télécharger la dernière version](https://github.com/Choisto/Choisto-DL-Releases/releases/latest)** · Jellyfin 12.1 ou plus récent
+**[Download the latest version](https://github.com/Choisto/Choisto-DL-Releases/releases/latest)** · Jellyfin 12.1 or later
 
 <!-- Shown under the changelog on every release page. Keep each paragraph on one line: GitHub turns every line break in release notes into a visible one. -->
 
-## Choisto DL, c'est quoi ?
+## What is Choisto DL?
 
-Un gestionnaire de téléchargements intégré à Jellyfin. Vous collez un lien, vous choisissez une bibliothèque, et le serveur télécharge le fichier, le renomme comme Jellyfin l'attend et le range dans la bibliothèque.
+A download manager built into Jellyfin. Paste a link, pick a library, and the server downloads the file, renames it the way Jellyfin expects and files it into the library.
 
-## Fonctionnalités
+## Features
 
-**Page Downloads dans le menu principal** (administrateurs uniquement)
-- Collez jusqu'à 200 liens d'un coup : un par ligne, ou un bloc de texte copié d'une page. Les liens sont extraits du texte, les doublons ignorés, et ceux qui sont refusés restent affichés avec la raison.
-- Suivez la file en direct : progression, vitesse, pause, reprise, annulation.
-- La file survit aux redémarrages et aux mises à jour ; un téléchargement interrompu reprend là où il s'était arrêté.
+**Downloads page in the main menu** (administrators only)
+- Paste up to 200 links at once: one per line, or a block of text copied from a page. Links are picked out of the text, duplicates are skipped, and the ones that are refused stay in the field with the reason.
+- Follow the queue live: progress, speed, pause, resume, cancel.
+- The queue survives restarts and updates; an interrupted download picks up where it left off.
 
-**Sources prises en charge**
-- **Liens HTTP / HTTPS directs**, avec reprise des transferts interrompus.
-- **1fichier** : via une clé API Premium (pleine vitesse, plusieurs à la fois, reprise possible ; *non testé en conditions réelles*), ou en gratuit, en invité ou connecté à un compte, avec gestion automatique des files d'attente et des délais.
-- **Torbox** (service debrid) : liens des hébergeurs pris en charge par Torbox, **liens magnet** et **fichiers .torrent**. Un torrent donne un téléchargement par vidéo (les samples, sous-titres et images sont écartés) ; une fois le torrent importé, le plugin le retire du compte Torbox, mais seulement s'il l'y a lui-même ajouté.
+**Supported sources**
+- **Direct HTTP / HTTPS links**, with interrupted transfers resumed.
+- **1fichier**: through a Premium API key (full speed, several at once, resumable; *not tested against a live account*), or for free, as a guest or signed in to an account, with queues and waiting times handled automatically.
+- **Torbox** (debrid service): links to the file hosts Torbox supports, **magnet links** and **.torrent files**. A torrent becomes one download per video (samples, subtitles and images are left out); once it is imported, the plugin removes the torrent from the Torbox account, but only if the plugin added it there.
 
-**Séries intelligentes (avec Torbox)**
+**Smart series (with Torbox)**
 
-Un torrent envoyé vers une bibliothèque de séries n'est pas téléchargé en entier : il reste sur Torbox et chaque épisode apparaît tout de suite dans Jellyfin, lu en streaming. Seuls l'épisode en cours et les suivants (3 par défaut) sont gardés sur le disque, pour chaque spectateur ; les épisodes vus sont libérés au bout de 7 jours.
+A torrent sent to a TV shows library is not downloaded in full: it stays on Torbox and every episode shows up in Jellyfin straight away, streamed. Only the episode being watched and the next ones (3 by default) are kept on disk, for each viewer; watched episodes are freed after 7 days.
 
-**Import dans les bibliothèques**
-- Renommage automatique selon les conventions de Jellyfin, par exemple :
+**Importing into libraries**
+- Automatic renaming following Jellyfin's conventions, for example:
   - `The.Matrix.1999.1080p.BluRay.x264-GRP.mkv` → `The Matrix (1999)/The Matrix (1999).mkv`
   - `Breaking.Bad.S01E02.720p.HDTV.mkv` → `Breaking Bad/Season 01/Breaking Bad S01E02.mkv`
-- **Extraction des archives** `.rar` (multi-volumes compris), `.zip` et `.7z`, sans outil à installer.
-- Scan de la bibliothèque après import, regroupé quand plusieurs téléchargements finissent ensemble.
-- Aucun fichier existant n'est jamais écrasé.
+- **Archive extraction** for `.rar` (multi-volume included), `.zip` and `.7z`, with nothing to install.
+- Library scan after an import, combined into one when several downloads finish together.
+- An existing file is never overwritten.
 
-**Fiabilité**
-- Nouvelle tentative automatique en cas d'erreur réseau (coupure, délai dépassé, erreur 5xx…), avec un délai qui s'allonge à chaque tentative.
-- Les fichiers trop petits pour être des vidéos (20 Mo par défaut), comme une page d'erreur enregistrée sous le nom d'un film, sont refusés.
+**Reliability**
+- Automatic retries on network errors (dropped connection, timeout, 5xx error…), waiting longer before each attempt.
+- Files too small to be videos (20 MB by default), such as an error page saved under a film's name, are refused.
 
 ## Installation
 
-Nécessite **Jellyfin 12.1** ou plus récent.
+Requires **Jellyfin 12.1** or later.
 
-1. Dans Jellyfin, ouvrez **Tableau de bord → Extensions → Dépôts** et ajoutez :
+1. In Jellyfin, open **Dashboard → Plugins → Repositories** and add:
    ```
    https://github.com/Choisto/Choisto-DL-Releases/releases/latest/download/manifest.json
    ```
-2. Installez **Choisto DL** depuis le catalogue, puis redémarrez le serveur.
-3. Réglez le plugin dans **Tableau de bord → Extensions → Choisto DL** (clés 1fichier et Torbox, dossier de travail, nombre de téléchargements simultanés…), puis ouvrez **Downloads** dans le menu principal.
+2. Install **Choisto DL** from the catalog, then restart the server.
+3. Set the plugin up under **Dashboard → Plugins → Choisto DL** (1fichier and Torbox keys, working directory, concurrent downloads…), then open **Downloads** from the main menu.
 
-Les mises à jour apparaissent ensuite directement dans le catalogue de Jellyfin.
+Updates then show up directly in Jellyfin's catalog.
