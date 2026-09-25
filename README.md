@@ -26,6 +26,10 @@ A download manager built into Jellyfin. Paste a link, pick a library, and the se
 
 A torrent sent to a TV shows library is not downloaded in full: it stays on Torbox and every episode shows up in Jellyfin straight away, streamed. Only the episode being watched and the next ones (3 by default) are kept on disk, for each viewer; watched episodes are freed after 7 days.
 
+**Smart movies (with Torbox)**
+
+A torrent sent to a movies library can stay on Torbox as well, when *Keep on Torbox (.strm)* is ticked as it is queued: every movie shows up in Jellyfin straight away and always streams, with nothing kept on disk. Once the movie is deleted from Jellyfin, the torrent is removed from Torbox, but only if the plugin added it there.
+
 **Importing into libraries**
 - Automatic renaming following Jellyfin's conventions, for example:
   - `The.Matrix.1999.1080p.BluRay.x264-GRP.mkv` → `The Matrix (1999)/The Matrix (1999).mkv`
